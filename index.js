@@ -7,10 +7,7 @@ const cursedType = require('./components/cursedType');
 const tarotCards = require('./components/CursedObjects/tarotCards');
 const ouijaBorad = require('./components/CursedObjects/ouijaBorad');
 const monkeyPaw = require('./components/CursedObjects/monkeyPaw');
-const settings = require('./commands/settings');
 
-//Create Channel ID to send Menssage.
-let channelIdSelect = null;
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -46,25 +43,15 @@ client.once(Events.ClientReady, c => {
 client.login(TOKEN);
 
 //All Commands
-client.on(Events.InteractionCreate, async interaction => {
-    //Verifying the ID Channel for chat bot functionality
+client.on(Events.InteractionCreate, async interaction => {   
     if(!interaction.isChatInputCommand())return;
     const command = interaction.client.commands.get(interaction.commandName);
     if(!command){
         console.error("Comando não encontrado");        
         return
     }
-    try{
-        if(channelIdSelect === null && interaction.commandName === 'settings'){
-            await command.execute(interaction, client)
-        }else if(interaction.channelId !== channelIdSelect){
-            interaction.reply({
-                content:'Não é possivel executar este comando aqui...',
-                ephemeral: true
-            })
-        }else{
-            await command.execute(interaction, client)
-        }
+    try{        
+        await command.execute(interaction, client)                    
     }catch(error){
         console.error(error);
         await interaction.reply("Houve um erro ao executar esse comando!");
@@ -72,17 +59,10 @@ client.on(Events.InteractionCreate, async interaction => {
 })
 
 //Select Menu Commands
-client.on(Events.InteractionCreate, async interaction => {    
-    
-    if(channelIdSelect === null && interaction.customId === 'selectChannel') channelIdSelect = await settings.response(interaction);
+client.on(Events.InteractionCreate, async interaction => {       
     if(interaction.isSelectMenu()){
         handleSelectMenuItems(interaction);  
     }
-    else if(interaction.isChannelSelectMenu()){
-        if(interaction.customId === 'selectChannel'){         
-            channelIdSelect = await settings.response(interaction);                
-        }       
-    }    
 })
 
 async function handleSelectMenuItems(interaction){

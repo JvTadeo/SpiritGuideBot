@@ -14,7 +14,7 @@ module.exports = {
                 embed = await embedImage('42 Edgefield Road', 'https://media.discordapp.net/attachments/1117126812758188112/1117128297227227186/42-edgefield-road.png?width=643&height=554');
             break;
             case 'ridgeview':                
-                embed = await embedImage('10 Ridgeview Court', 'https://media.discordapp.net/attachments/1117126812758188112/1117128299886411836/tanglewood.png?width=577&height=554');
+                embed = await embedImage('10 Ridgeview Court', 'https://media.discordapp.net/attachments/1117126812758188112/1128146771579768962/10-ridgeview-court.png?width=690&height=554');
             break;
             case 'bleasdale':                
                 embed = await embedImage('Bleasdale Farmhouse', 'https://media.discordapp.net/attachments/1117126812758188112/1117128297508241508/bleasdale-farmhouse.png?width=678&height=554');
